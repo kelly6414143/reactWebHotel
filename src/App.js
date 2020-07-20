@@ -1,14 +1,11 @@
 import React from 'react';
-import './style/App.scss';
+import './style/app.scss';
+import Homepage from './components/homepage/Homepage';
 
-function App() {
+const App = ()=> {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          welcome reactHotel
-        </p>
-      </header>
+      <Homepage/>
     </div>
   );
 }
