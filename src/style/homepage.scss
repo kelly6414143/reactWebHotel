@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
+
+.homepage {
+    h1 {
+        font-family: "Amatic SC", cursive !important;
+        font-size: 80px;
+        text-align: center;
+        padding-top: 68px;
+        height: calc(100vh * (5 / 8));
+        box-sizing: border-box;
+    }
+    &_footer {
+        height: calc(100vh * (3 / 8));
+        background-color: #f0f0f0;
+    }
+}
