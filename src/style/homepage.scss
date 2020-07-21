@@ -8,9 +8,40 @@
         padding-top: 68px;
         height: calc(100vh * (5 / 8));
         box-sizing: border-box;
+        color: #4B4B4B;
     }
     &_footer {
         height: calc(100vh * (3 / 8));
         background-color: #f0f0f0;
+        position: relative;
+    }
+    &_roomcarousel{
+        display: flex;
+        position: relative;
+        top: -100px;
+        margin: 0 auto;
+        width: calc(100% - 196px);
+        overflow: hidden;
+        &_roomcard{
+            width: 100%;
+            margin: 0 1px;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+        }
+        &_imgwrapper{
+            width: 100%;
+            min-width: 200px;
+            height: 200px;
+            background-size: cover;
+            background-position: bottom;
+        }
+        &_roominfo{
+            margin-top: 6px;
+            font-size: 15px;
+            line-height: 20px;
+            color: #707070;
+            font-weight: bold;
+        }
     }
 }
