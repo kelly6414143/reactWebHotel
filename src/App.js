@@ -6,7 +6,6 @@ import Homepage from './components/homepage/Homepage';
 import Roompage from './components/roompage/Roompage';
 
 const App = (props) => {
-  console.log(props)
   return (
     <Router className="App" >
       <Switch>
