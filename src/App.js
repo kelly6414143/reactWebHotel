@@ -7,7 +7,7 @@ import Roompage from './components/roompage/Roompage';
 
 const App = (props) => {
   return (
-    <Router className="App" >
+    <Router >
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/roomInfo/:type" component={Roompage} />
