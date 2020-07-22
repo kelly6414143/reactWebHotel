@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
 
 .homepage {
+    background: -webkit-linear-gradient(top,white 62.5%,#f0f0f0 37.5%);
+    &_wrapper{
+        width: 1280px;
+        margin: 0 auto;
+    }
     h1 {
         font-family: "Amatic SC", cursive !important;
         font-size: 80px;
@@ -24,21 +29,24 @@
         overflow: hidden;
         &_roomcard {
             width: 100%;
-            margin: 0 1px;
             display: flex;
             flex-direction: column;
             padding-bottom: 10px;
             text-decoration: none;
+            &:not(:last-child){
+                border-right: 1px solid white;
+            }
         }
         &_imgwrapper {
             width: 100%;
-            min-width: 200px;
-            height: 200px;
+            min-width: 180.45px;
+            height: 223.13px;
             background-size: cover;
             background-position: bottom;
         }
         &_roominfo {
             margin-top: 6px;
+            margin-left: 5.5px;
             font-size: 15px;
             line-height: 20px;
             color: #707070;
@@ -46,18 +54,23 @@
         }
     }
     &_webinfo {
-        position: relative;
-        top: -44px;
-        display: flex;
-        justify-content: space-around;
-        width: calc(100% - 196px);
-        margin: 0 auto;
-        p {
-            min-width: 100px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 5px;
+        position: absolute;
+        bottom: 22px;
+        width: 100%;
+        &_wrapper{
+            width: calc(100% - 196px);
+            display: flex;
+            justify-content: space-around;
+            margin: 0 auto;
+            p {
+                min-width: 100px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                padding: 5px;
+                color: #B4B2B2;
+            }
         }
+
     }
 }
