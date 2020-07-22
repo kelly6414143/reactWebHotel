@@ -1,0 +1,13 @@
+.roompage{
+  background: -webkit-linear-gradient(top,#f0f0f0 18.25%,white 18.25%);
+  height: 100vh;
+  &_wrapper{
+    width: 1280px;
+    margin: 0 auto;
+    h2{
+      font-family: "Amatic SC", cursive !important;
+      font-size: 35px;
+      padding: 27px 0px 5.6px 98px;
+    }
+  }
+}
