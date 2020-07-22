@@ -6,9 +6,12 @@ const api={
         getRooms(){
             return req('rooms','get')
         },
-        // addGuest(params){
-        //     return req('post','/guest',params)
-        // }
+        getSingleRoom(param){
+            return req(`room/${param.id}`,'get')
+        },
+        addGuest(params){
+            return req('post','/guest',params)
+        }
     }
 }
 
