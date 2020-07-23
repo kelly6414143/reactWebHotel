@@ -12,6 +12,10 @@ const HomepageConainer = (WrappedComponent) => class extends React.Component {
     componentWillMount() {
         api.room.getRooms().then((res) => {
             const { success,items } = res.data
+            const allRooms = items.map(el=>{
+                return {name:el.name.split(' ').join(''), id:el.id}
+            })
+            sessionStorage.setItem('allRooms', JSON.stringify(allRooms))
             if (success) {
                 if (items && items.length > 0) {
                     this.setState({
