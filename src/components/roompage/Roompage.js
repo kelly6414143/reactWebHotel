@@ -1,6 +1,5 @@
 import React from 'react';
 import RoompageConainer from '../../containers/roompage/Roompage'
-import '../../style/roompage.scss'
 
 const Roompage = (props) => {
     console.log(props)
