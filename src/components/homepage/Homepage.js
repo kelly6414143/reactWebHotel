@@ -15,7 +15,7 @@ const Homepage = (props) => {
                             rooms.map((el) => {
                                     const trimRoomName = el.name.split(' ').join('')
                                     return (
-                                        <Link to={ `/roomInfo/${ trimRoomName }` } key={ el.id } className="homepage_roomcarousel_roomcard">
+                                        <Link to={{ pathname:`/roomInfo/${ trimRoomName }`, query:{id: el.id} }} key={ el.id } className="homepage_roomcarousel_roomcard">
                                             <div className="homepage_roomcarousel_imgwrapper" style={ { backgroundImage: `url(${ el.imageUrl })` } }></div>
                                             <div className="homepage_roomcarousel_roominfo">
                                                 <h3>{ el.name }</h3>
