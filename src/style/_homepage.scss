@@ -1,0 +1,75 @@
+// @import 'var.scss';
+
+.homepage {
+    @include layoutToptoDowmGradient( white,#f0f0f0,$homeLargeRange );
+    // background: -webkit-linear-gradient(top,white 62.5%,#f0f0f0 62.5%);
+    &_wrapper{
+        width: $largeWidth;
+        margin: $marginCenter;
+    }
+    h1 {
+        font-family: $mainFont;
+        font-size: 80px;
+        text-align: center;
+        padding-top: 68px;
+        height: calc(100vh * (5 / 8));
+        box-sizing: border-box;
+        color: $darkBlack;
+    }
+    &_footer {
+        height: calc(100vh * (3 / 8));
+        background-color: $lightWhite;
+        position: relative;
+    }
+    &_roomcarousel {
+        display: flex;
+        position: relative;
+        top: -100px;
+        margin: 0 98px;
+        // width: calc(100% - 196px);
+        overflow: hidden;
+        &_roomcard {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+            text-decoration: none;
+            &:not(:last-child){
+                border-right: 1px solid white;
+            }
+        }
+        &_imgwrapper {
+            width: 100%;
+            min-width: 180.45px;
+            height: 223.13px;
+            background-size: cover;
+            background-position: bottom;
+        }
+        &_roominfo {
+            margin-top: 6px;
+            margin-left: 5.5px;
+            font-size: 15px;
+            line-height: 20px;
+            color: $middleBlack;
+            font-weight: bold;
+        }
+    }
+    &_webinfo {
+        position: absolute;
+        bottom: 22px;
+        width: 100%;
+        &_wrapper{
+            // width: calc(100% - 196px);
+            margin: 0 98px;
+            display: flex;
+            justify-content: space-around;
+            margin: $marginCenter;
+            p {
+                @include font-ellipsis(100px);
+                padding: 5px;
+                color: $lightBlack;
+            }
+        }
+
+    }
+}

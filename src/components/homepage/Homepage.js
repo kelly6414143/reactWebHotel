@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HomepageConainer from '../../containers/homepage/Homepage'
-import '../../style/homepage.scss'
+// import '../../style/homepage.scss'
 
 const Homepage = (props) => {
     const { rooms } = props
