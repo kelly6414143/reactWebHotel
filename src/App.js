@@ -11,7 +11,7 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/roomInfo/:type" component={Roompage} />
-        <Redirect from="/roomInfo/" to="/roomInfo/SingleRoom" />
+        <Redirect from="/roomInfo/" to="/roomInfo/Single_Room" />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>
