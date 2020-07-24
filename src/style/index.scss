@@ -1,13 +1,15 @@
-@import 'reset.scss';
-@import 'var.scss';
-@import 'homepage.scss';
-@import 'roompage.scss';
+@import "reset.scss";
+@import "var.scss";
+@import "homepage.scss";
+@import "roompage.scss";
 
 body {
-    margin: 0;
-    font-family: $secondFont;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  
+  margin: 0;
+  font-family: $secondFont;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*{
+  box-sizing: border-box;
+  text-decoration: none;
+}
