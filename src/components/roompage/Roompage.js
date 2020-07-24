@@ -1,41 +1,59 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import RoompageConainer from '../../containers/roompage/Roompage'
 
 const Roompage = (props) => {
-    // const [room, setRoom] = useState([])
-    const[imageOne, setImageOne] = useState("")
+    const { allRooms, room } = props
+    const [roomInfo, setRoomInfo] = useState([])
+    const [images, setImages] = useState([])
 
-    useEffect(()=>{
-        console.log(props)
-
-        if(props.room.length>0){
-            setImageOne(props.room[0].imageUrl[0])
+    useEffect(() => {
+        const { room } = props
+        if (room.length > 0) {
+            setRoomInfo(room)
         }
-        // setRoom(props.room)
-    },[])
-
-    // useEffect(()=>{
-    //     console.log(props)
-       // if(room.length>0){
-       //     setImageOne(room[0].imageUrl[0])
-       // }
-    // })
+    })
 
 
+    useEffect(() => {
+        if (roomInfo.length > 0) {
+            setImages(roomInfo[0].imageUrl)
+        }
+    }, [roomInfo])
+
+    // console.log('99999999999999999999999')
     return (
         <div className="roompage">
             <div className="roompage_wrapper">
-                <h2>WHITE INN</h2>
-            </div>
-            <div className="roompage_info">
-                <div className="roompage_info_left">
-                    <div style={ { backgroundImage: `url(${ imageOne })`} }></div>
-                    <div>
-                        <div></div>
-                        <div></div>
+                <div className="roompage_info">
+                    <div className="roompage_info_left">
+                        <Link to={'/'}><h2>WHITE INN</h2></Link>
+                        <div className="roompage_info_left_largeimage" style={{ backgroundImage: `url(${images[0]})` }}></div>
+                        <div className="roompage_info_left_smallimages">
+                            <div className="roompage_info_left_smallimages_image" style={{ backgroundImage: `url(${images[1]})` }}></div>
+                            <div className="roompage_info_left_smallimages_image" style={{ backgroundImage: `url(${images[2]})` }}></div>
+                        </div>
+                    </div>
+                    <div className="roompage_info_right">
+                        <div className="roompage_info_right_top">
+                            {
+                                allRooms && allRooms.length > 0 ? allRooms.map(el => {
+                                    console.log(el.id, room[0])
+                                    if (el.id !== room[0].id) {
+                                        return (
+                                            <h4 key={el.id}>{el.name.split("_").join(" ")}</h4>
+                                        )
+                                    }
+                                    return false
+                                }) : false
+                            }
+                        </div>
+                        <div className="roompage_info_right_middle">
+                            
+                        </div>
+                        <div className="roompage_info_right_down"></div>
                     </div>
                 </div>
-                <div className="roompage_info_right"></div>
             </div>
         </div>
     )

@@ -11,26 +11,21 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
     }
 
     componentDidMount() {
-        console.log('99999999999999999999999')
         const { location, history } = this.props
         const roomType = location.pathname.split('/roomInfo/').join("")
+        const parseAllRooms = JSON.parse(sessionStorage.allRooms)
 
-        const realUrl = JSON.parse(sessionStorage.allRooms).filter(el => {
+        const realUrl = parseAllRooms.filter(el => {
             if (el.name === roomType) {
                 sessionStorage.setItem('roomId', el.id)
                 return true
             }
             return false
         })
-        console.log(realUrl)
+
         if (realUrl.length < 1) {
             history.push('/')
         }
-
-
-        // if (location.query && location.query.id) {
-        //     sessionStorage.setItem('roomId', location.query.id)
-        // }
 
         api.room.getSingleRoom(
             { id: sessionStorage.roomId })
@@ -39,7 +34,9 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
                 if (success) {
                     this.setState({
                         room: room,
-                        booking: booking
+                        booking: booking,
+                        allRooms:parseAllRooms
+
                     })
                 }
             })
