@@ -1,13 +1,52 @@
-.roompage{
-  background: -webkit-linear-gradient(top,#f0f0f0 18.25%,white 18.25%);
+.roompage {
+  background: -webkit-linear-gradient(top, #f0f0f0 18.25%, white 18.25%);
   height: 100vh;
-  &_wrapper{
+  &_wrapper {
     width: $largeWidth;
     margin: $marginCenter;
-    h2{
+  }
+  &_info {
+    display: flex;
+    flex: 1;
+    margin: 0 52px 0 90.5px;
+    h2 {
+      display: inline-block;
       font-family: $mainFont;
       font-size: 35px;
-      padding: 27px 0px 5.6px 98px;
+      padding: 27px 0px 5px 7.5px;
+      color: $darkBlack;
+    }
+    &_left {
+      width: 100%;
+      &_largeimage {
+        width: 100%;
+        height: 71.4vh;
+        @include bgcImgCenter;
+        border-bottom: 2.3px solid white;
+      }
+      &_smallimages {
+        display: flex;
+        &_image {
+          width: 100%;
+          height: 12.6vh;
+          @include bgcImgCenter;
+          &:not(:last-child) {
+            border-right: 2.3px solid white;
+          }
+        }
+      }
+    }
+    &_right {
+      width: 100%;
+      margin-left: 27px;
+      &_top {
+        display: flex;
+        justify-content: space-between;
+        color: $middleBlack;
+        font-size: 14px;
+        height: calc(17.25vh - 14px);
+        align-items: flex-end;
+      }
     }
   }
 }
