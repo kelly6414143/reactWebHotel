@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap");
 
 //layout
 $largeWidth: 1280px;
 $lightWhite: #f0f0f0;
 $homeLargeRange: 62.5%;
-
 
 //Font
 $mainFont: "Amatic SC", cursive !important;
@@ -17,8 +16,6 @@ $lightBlack: #b4b2b2;
 //margin
 $marginCenter: 0 auto;
 
-
-
 @mixin font-ellipsis($width) {
     min-width: $width;
     text-overflow: ellipsis;
@@ -27,5 +24,10 @@ $marginCenter: 0 auto;
 }
 
 @mixin layoutToptoDowmGradient($firstcolor, $secondcolor, $percent) {
-    background: -webkit-linear-gradient(top,$firstcolor $percent, $secondcolor $percent);
+    background: -webkit-linear-gradient(top, $firstcolor $percent, $secondcolor $percent);
+}
+
+@mixin bgcImgCenter {
+    background-position: center;
+    background-size: cover;
 }
