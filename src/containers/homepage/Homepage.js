@@ -13,7 +13,7 @@ const HomepageConainer = (WrappedComponent) => class extends React.Component {
         api.room.getRooms().then((res) => {
             const { success,items } = res.data
             const allRooms = items.map(el=>{
-                return {name:el.name.split(' ').join(''), id:el.id}
+                return {name:el.name.split(' ').join('_'), id:el.id}
             })
             sessionStorage.setItem('allRooms', JSON.stringify(allRooms))
             if (success) {
