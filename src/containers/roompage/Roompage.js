@@ -10,6 +10,25 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
         }
     }
 
+    onChangeRoomType=(el)=>{
+        sessionStorage.setItem('roomId', el.id)
+        this.onFetchRoomInfo()
+    }
+
+    onFetchRoomInfo = ()=>{
+        api.room.getSingleRoom(
+            { id: sessionStorage.roomId })
+            .then((res) => {
+                const { success, room, booking } = res.data
+                if (success) {
+                    this.setState({
+                        room: room,
+                        booking: booking
+                    })
+                }
+            })
+    }
+
     componentDidMount() {
         const { location, history } = this.props
         const roomType = location.pathname.split('/roomInfo/').join("")
@@ -27,24 +46,34 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
             history.push('/')
         }
 
-        api.room.getSingleRoom(
-            { id: sessionStorage.roomId })
-            .then((res) => {
-                const { success, room, booking } = res.data
-                if (success) {
-                    this.setState({
-                        room: room,
-                        booking: booking,
-                        allRooms:parseAllRooms
+        this.setState({
+            allRooms: parseAllRooms
+        })
 
-                    })
-                }
-            })
+        this.onFetchRoomInfo()
+
+        // api.room.getSingleRoom(
+        //     { id: sessionStorage.roomId })
+        //     .then((res) => {
+        //         const { success, room, booking } = res.data
+        //         if (success) {
+        //             this.setState({
+        //                 room: room,
+        //                 booking: booking,
+        //                 allRooms:parseAllRooms
+        //
+        //             })
+        //         }
+        //     })
     }
 
     render() {
         return (
-            <WrappedComponent {...this.state} {...this.props} />
+            <WrappedComponent
+                onChangeRoomType={this.onChangeRoomType}
+                {...this.state}
+                {...this.props}
+            />
         )
     }
 }
