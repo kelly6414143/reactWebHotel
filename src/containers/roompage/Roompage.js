@@ -8,7 +8,8 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
             room: [],
             booking: [],
             imageArr: [],
-            isShowReserveDialog: false
+            isShowReserveDialog: false,
+            isShowLoading: false
         }
     }
 
@@ -18,6 +19,9 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
     }
 
     onFetchRoomInfo = () => {
+        this.setState({
+            isShowLoading: true
+        })
         api.room.getSingleRoom(
             { id: sessionStorage.roomId })
             .then((res) => {
@@ -26,7 +30,8 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
                     this.setState({
                         room: room,
                         booking: booking,
-                        imageArr: room[0].imageUrl
+                        imageArr: room[0].imageUrl,
+                        isShowLoading: false
                     })
                 }
             })

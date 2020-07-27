@@ -5,6 +5,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Dialog from '../../common/components/Dialog'
+import Loading from '../../common/components/Loading'
 
 const roomType = {
     'Single': '單人床',
@@ -19,6 +20,7 @@ const Roompage = (props) => {
         room,
         imageArr,
         isShowReserveDialog,
+        isShowLoading,
         onChangeRoomType,
         onChangeArrangement,
         onShowReserveDialog,
@@ -170,6 +172,7 @@ const Roompage = (props) => {
                         <button>確定</button>
                     </div>
                 </Dialog>
+                <Loading isShow={isShowLoading}></Loading>
             </div>
         </>
     )
