@@ -6,16 +6,18 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
         super(props)
         this.state = {
             room: [],
-            booking: []
+            booking: [],
+            imageArr: [],
+            isShowReserveDialog: false
         }
     }
 
-    onChangeRoomType=(el)=>{
+    onChangeRoomType = (el) => {
         sessionStorage.setItem('roomId', el.id)
         this.onFetchRoomInfo()
     }
 
-    onFetchRoomInfo = ()=>{
+    onFetchRoomInfo = () => {
         api.room.getSingleRoom(
             { id: sessionStorage.roomId })
             .then((res) => {
@@ -23,10 +25,38 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
                 if (success) {
                     this.setState({
                         room: room,
-                        booking: booking
+                        booking: booking,
+                        imageArr: room[0].imageUrl
                     })
                 }
             })
+    }
+
+    onChangeArrangement = () => {
+        const { imageArr } = this.state
+        const newImageArr = []
+        for (let i = 0; i < imageArr.length; i++) {
+            if (i < imageArr.length - 1) {
+                newImageArr[i] = imageArr[i + 1]
+            } else {
+                newImageArr[i] = imageArr[0]
+            }
+        }
+        this.setState({
+            imageArr: newImageArr
+        })
+    }
+
+    onShowReserveDialog = () => {
+        this.setState({
+            isShowReserveDialog: true
+        })
+    }
+
+    onCloseReserveDialog = ()=>{
+        this.setState({
+            isShowReserveDialog: false
+        })
     }
 
     componentDidMount() {
@@ -71,6 +101,9 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
         return (
             <WrappedComponent
                 onChangeRoomType={this.onChangeRoomType}
+                onChangeArrangement={this.onChangeArrangement}
+                onShowReserveDialog={this.onShowReserveDialog}
+                onCloseReserveDialog = {this.onCloseReserveDialog}
                 {...this.state}
                 {...this.props}
             />
