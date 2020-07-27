@@ -62,6 +62,7 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
     componentDidMount() {
         const { location, history } = this.props
         const roomType = location.pathname.split('/roomInfo/').join("")
+        if(!sessionStorage.allRooms) return history.push('/')
         const parseAllRooms = JSON.parse(sessionStorage.allRooms)
 
         const realUrl = parseAllRooms.filter(el => {
