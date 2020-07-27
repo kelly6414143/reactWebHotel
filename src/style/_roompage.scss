@@ -25,6 +25,7 @@
         height: 72vh;
         @include bgcImgCenter;
         border-bottom: 2.3px solid white;
+        cursor: pointer;
       }
       &_caroucelBtn {
         position: absolute;
@@ -51,6 +52,7 @@
           width: 100%;
           height: 12.5vh;
           @include bgcImgCenter;
+          cursor: pointer;
           &:not(:last-child) {
             border-right: 2.3px solid white;
           }
@@ -171,7 +173,7 @@
     .roompagedialog {
       text-align: center;
       padding: 31px 51px;
-      &_wrapper{
+      &_wrapper {
         height: 230px;
         overflow: auto;
       }
@@ -181,16 +183,16 @@
         padding-bottom: 8px;
         border-bottom: 1px solid $lightBlack;
       }
-      &_content{
+      &_content {
         padding: 20px 0;
         margin: 0 50px;
         border-bottom: 3px solid $lightBlack;
-        &_descri{
-          &:first-child{
+        &_descri {
+          &:first-child {
             margin-bottom: 10px;
           }
-          span{
-            &:first-child{
+          span {
+            &:first-child {
               display: inline-block;
               padding: 9px 16px;
               color: $lightBlack;
@@ -200,7 +202,7 @@
           }
         }
       }
-      &_total{
+      &_total {
         text-align: right;
         margin: 16px 80px 0;
       }
@@ -209,6 +211,16 @@
         bottom: 31px;
         left: calc(50% - 100px);
         @include send-btn(200px);
+      }
+    }
+    .roompageimagedialog {
+      height: 50vh;
+      img {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        height: 100%;
       }
     }
   }

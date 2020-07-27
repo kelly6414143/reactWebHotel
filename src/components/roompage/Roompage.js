@@ -19,12 +19,16 @@ const Roompage = (props) => {
         allRooms,
         room,
         imageArr,
+        imageUrl,
         isShowReserveDialog,
         isShowLoading,
+        isShowImageDialog,
         onChangeRoomType,
         onChangeArrangement,
         onShowReserveDialog,
-        onCloseReserveDialog
+        onCloseReserveDialog,
+        onShowImageDialog,
+        onCloseImageDialog
     } = props
 
     const RoomListComponent = () => {
@@ -69,12 +73,12 @@ const Roompage = (props) => {
 
     const ImageCarouselComponent = () =>
         imageArr && imageArr.length > 0 ? <>
-            <div className="roompage_info_left_largeimage" style={{ backgroundImage: `url(${imageArr[0]})` }}>
+            <div className="roompage_info_left_largeimage" style={{ backgroundImage: `url(${imageArr[0]})` }} onClick={()=>onShowImageDialog(imageArr[0])}>
                 <span className="roompage_info_left_caroucelBtn" onClick={onChangeArrangement}><ArrowForwardIosIcon /></span>
             </div>
             <div className="roompage_info_left_smallimages">
-                <div className="roompage_info_left_smallimages_image" style={{ backgroundImage: `url(${imageArr[1]})` }}></div>
-                <div className="roompage_info_left_smallimages_image" style={{ backgroundImage: `url(${imageArr[2]})` }}></div>
+                <div className="roompage_info_left_smallimages_image" style={{ backgroundImage: `url(${imageArr[1]})` }} onClick={()=>onShowImageDialog(imageArr[1])}></div>
+                <div className="roompage_info_left_smallimages_image" style={{ backgroundImage: `url(${imageArr[2]})` }} onClick={()=>onShowImageDialog(imageArr[2])}></div>
             </div>
         </> : null
 
@@ -170,6 +174,11 @@ const Roompage = (props) => {
                             <div className="roompagedialog_total">3 晚 /  4260 元</div>
                         </div>
                         <button>確定</button>
+                    </div>
+                </Dialog>
+                <Dialog isShow={isShowImageDialog} onClose={onCloseImageDialog} >
+                    <div className="roompageimagedialog">
+                        <img src={imageUrl}></img>
                     </div>
                 </Dialog>
                 <Loading isShow={isShowLoading}></Loading>
