@@ -15,14 +15,14 @@
         left: calc(50% - 85px);
         display: flex;
         align-items: center;
-        color: white;
+        color: $lightBlack;
         font-size: 48px;
         font-weight: bolder;
         animation: scale .7s linear;
         @keyframes scale{
             from{
                 opacity: 0;
-                top: calc(50% - 37px);
+                top: calc(50% - 10px);
             }
             to{
                 opacity: 1;
