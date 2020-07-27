@@ -20,10 +20,30 @@
         color: $darkBlack;
       }
       &_largeimage {
+        position: relative;
         width: 100%;
         height: 72vh;
         @include bgcImgCenter;
         border-bottom: 2.3px solid white;
+      }
+      &_caroucelBtn {
+        position: absolute;
+        bottom: 23px;
+        right: 16px;
+        width: 50px;
+        height: 50px;
+        display: block;
+        background-color: #fff;
+        border-radius: 50%;
+        color: $lightBlack;
+        text-align: center;
+        cursor: pointer;
+        &:active{
+          transform: scale(.8);
+        }
+        svg {
+          height: 50px;
+        }
       }
       &_smallimages {
         display: flex;
@@ -38,6 +58,9 @@
       }
     }
     &_right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       width: 100%;
       margin-left: 29.1px;
       &_top {
@@ -45,76 +68,82 @@
         justify-content: space-between;
         color: $middleBlack;
         font-size: 14px;
-        height: calc(17.25vh - 14px);
+        height: calc(17.25vh - 5vh - 14px);
         align-items: flex-end;
-        a{
+        a {
           color: $darkBlack;
         }
-        h4:hover{
+        h4:hover {
           border-bottom: 1px solid $darkBlack;
           cursor: pointer;
         }
       }
-      &_middle{
+      &_middle {
         margin-top: 50px;
-        color:$contentBlack;
+        color: $contentBlack;
         height: 55vh;
         overflow: hidden;
-        &_top{
+        &_top {
           display: flex;
           justify-content: space-between;
           margin-bottom: 19px;
-          h3{
+          h3 {
             font-size: 30px;
             font-weight: bold;
           }
         }
-        &_price{
+        &_price {
           margin-top: 20px;
           line-height: 20px;
-          span{
+          span {
             font-weight: bolder;
           }
         }
-        &_down{
+        &_down {
           display: flex;
-          &_half{
+          &_half {
             width: 100%;
-            input{
+            &:first-child {
+              margin-right: 35px;
+            }
+            input {
               width: 100%;
               height: 52px;
               margin-bottom: 8px;
               padding: 17px;
+              &::placeholder {
+                color: $lightBlack;
+              }
             }
           }
         }
-        &_descri{
+        &_descri {
           font-family: "Helvetica Neue";
           font-size: 15px;
           line-height: 22px;
           color: $middleBlack;
           margin-bottom: 14px;
         }
-        &_detail{
+        &_detail {
           line-height: 20px;
         }
 
-        &_formDate{
+        &_formDate {
           display: flex;
           justify-content: space-between;
-          input{
-            &:not(:last-child){
+          input {
+            &:not(:last-child) {
               margin-right: 10px;
             }
           }
         }
-        &_formButton{
+        &_formButton {
           display: flex;
           justify-content: space-between;
-          div{
+          div {
             margin-left: 5px;
             width: 100%;
-            button{
+            button {
               height: 52px;
               width: 100%;
               border: 0;
@@ -122,17 +151,25 @@
               font-size: 15px;
               font-family: $secondFont;
               color: white;
+              cursor: pointer;
             }
           }
         }
       }
-      &_down{
+      &_down {
         border-top: 1px solid $lightBlack;
         display: flex;
         flex-wrap: wrap;
-
-        &_item{
-          width: calc(100% / 3 );
+        padding-top: 16.5px;
+        &_item {
+          display: flex;
+          align-items: center;
+          width: calc(100% / 3);
+          color: $lightBlack;
+          span {
+            color: $contentBlack;
+            font-size: 15px;
+          }
         }
       }
     }
