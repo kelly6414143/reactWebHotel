@@ -17,6 +17,17 @@ $contentBlack: #676767;
 //margin
 $marginCenter: 0 auto;
 
+@mixin send-btn ($width) {
+        height: 52px;
+        width: $width;
+        border: 0;
+        background-color: $lightBlack;
+        font-size: 15px;
+        font-family: $secondFont;
+        color: white;
+        cursor: pointer;
+}
+
 @mixin font-ellipsis($width) {
     min-width: $width;
     text-overflow: ellipsis;
