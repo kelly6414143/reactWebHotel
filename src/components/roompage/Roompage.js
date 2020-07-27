@@ -151,10 +151,26 @@ const Roompage = (props) => {
                         </div>
                     </div>
                 </div>
+                <Dialog isShow={isShowReserveDialog} onClose={onCloseReserveDialog} >
+                    <div className="roompagedialog">
+                        <div className="roompagedialog_wrapper">
+                            <h3>{room.length > 0 && room[0].name}</h3>
+                            <div className="roompagedialog_content">
+                                <div className="roompagedialog_content_descri">
+                                    <span>入住</span>
+                                    <span>2019/09/10 星期三（15:00 起）</span>
+                                </div>
+                                <div className="roompagedialog_content_descri">
+                                    <span>退房</span>
+                                    <span>2019/09/12 星期五（10:00 前）</span>
+                                </div>
+                            </div>
+                            <div className="roompagedialog_total">3 晚 /  4260 元</div>
+                        </div>
+                        <button>確定</button>
+                    </div>
+                </Dialog>
             </div>
-            <Dialog isShow={isShowReserveDialog} onClose={onCloseReserveDialog} >
-                <div>ddd</div>
-            </Dialog>
         </>
     )
 
