@@ -9,8 +9,8 @@ const api={
         getSingleRoom(param){
             return req(`room/${param.id}`,'get')
         },
-        addGuest(params){
-            return req('post','/guest',params)
+        addRoom(params){
+            return req(`room/${params.id}`,'post',params)
         }
     }
 }

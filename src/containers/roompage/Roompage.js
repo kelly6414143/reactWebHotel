@@ -2,7 +2,7 @@ import React from 'react'
 import api from '../../apis/api'
 
 const RoompageConainer = (WrappedComponent) => class extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.state = {
             room: [],
@@ -13,7 +13,10 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
             isShowImageDialog: false,
             isShowCheckinDatePicker: false,
             isShowCheckoutDatePicker: false,
-            imageUrl: ''
+            imageUrl: '',
+            checkinDay: null,
+            name: '',
+            phone: ''
         }
     }
 
@@ -34,7 +37,7 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
                     this.setState({
                         room: room,
                         booking: booking,
-                        imageArr: room[ 0 ].imageUrl,
+                        imageArr: room[0].imageUrl,
                         isShowLoading: false
                     })
                 }
@@ -47,9 +50,9 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
         const newImageArr = []
         for (let i = 0; i < imageArr.length; i++) {
             if (i < imageArr.length - 1) {
-                newImageArr[ i ] = imageArr[ i + 1 ]
+                newImageArr[i] = imageArr[i + 1]
             } else {
-                newImageArr[ i ] = imageArr[ 0 ]
+                newImageArr[i] = imageArr[0]
             }
         }
         this.setState({
@@ -58,6 +61,12 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
     }
 
     onShowReserveDialog = () => {
+        const { name, phone, checkinDay, checkoutDay } = this.state
+
+        if (!name || !phone || !checkinDay || !checkoutDay) {
+            return alert('資料未填寫完整，請輸入完整')
+        }
+
         this.setState({
             isShowReserveDialog: true
         })
@@ -83,9 +92,6 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
     }
 
     onShowCheckinDatePicker = () => {
-
-        console.log('gerg')
-
         this.setState({
             isShowCheckinDatePicker: true
         })
@@ -98,13 +104,75 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
     }
 
     onShowCheckoutDatePicker = () => {
-
         this.setState({
             isShowCheckoutDatePicker: true
         })
     }
 
-    componentDidMount () {
+    onhandleCheckinDayClick = (date) => {
+        this.setState({
+            checkinDay: date
+        })
+    }
+
+    onhandleCheckoutDayClick = (date) => {
+        this.setState({
+            checkoutDay: date
+        })
+    }
+
+    onChangeName = (e) => {
+        this.setState({
+            name: e.target.value
+        })
+    }
+
+    onChangePhone = (e) => {
+        this.setState({
+            phone: e.target.value
+        })
+    }
+
+    formatDate = (d) => {
+        const date = new Date(d);
+        const month = (date.getMonth() + 1) < 10 ? `0${(date.getMonth() + 1)}` : (date.getMonth() + 1)
+        const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+        const formatdate = `${date.getFullYear()}-${month}-${day}`
+        return formatdate
+    }
+
+    onReservationSubmit = (e) => {
+        const { name, phone, checkinDay, checkoutDay } = this.state
+        // console.log(checkinDay)
+        e.stopPropagation()
+
+        try{
+            api.room.addRoom(
+                {
+                    id: sessionStorage.roomId,
+                    name: name,
+                    tel: phone,
+                    date: [this.formatDate(checkinDay), this.formatDate(checkoutDay)]
+                })
+                .then((res) => {
+                    // console.log(res)
+                    // const { success, room, booking } = res.data
+                    // if (success) {
+                    //     this.setState({
+                    //         room: room,
+                    //         booking: booking,
+                    //         imageArr: room[0].imageUrl,
+                    //         isShowLoading: false
+                    //     })
+                    // }
+                })
+        }catch(err){
+            console.log(err)
+            alert(err.message)
+        }
+    }
+
+    componentDidMount() {
         const { location, history } = this.props
         const roomType = location.pathname.split('/roomInfo/').join('')
         if (!sessionStorage.allRooms) return history.push('/')
@@ -129,18 +197,24 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
         this.onFetchRoomInfo()
     }
 
-    render () {
+    render() {
         return (
             <WrappedComponent
-                onChangeRoomType={ this.onChangeRoomType }
-                onChangeArrangement={ this.onChangeArrangement }
-                onShowReserveDialog={ this.onShowReserveDialog }
-                onCloseReserveDialog={ this.onCloseReserveDialog }
-                onShowImageDialog={ this.onShowImageDialog }
-                onCloseImageDialog={ this.onCloseImageDialog }
-                onShowCheckinDatePicker={ this.onShowCheckinDatePicker }
-                onShowCheckoutDatePicker={ this.onShowCheckoutDatePicker }
-                onCloseCheckinDatePicker={ this.onCloseCheckinDatePicker }{ ...this.state } { ...this.props }
+                onChangeRoomType={this.onChangeRoomType}
+                onChangeArrangement={this.onChangeArrangement}
+                onShowReserveDialog={this.onShowReserveDialog}
+                onCloseReserveDialog={this.onCloseReserveDialog}
+                onShowImageDialog={this.onShowImageDialog}
+                onCloseImageDialog={this.onCloseImageDialog}
+                onShowCheckinDatePicker={this.onShowCheckinDatePicker}
+                onShowCheckoutDatePicker={this.onShowCheckoutDatePicker}
+                onCloseCheckinDatePicker={this.onCloseCheckinDatePicker}
+                onhandleCheckinDayClick={this.onhandleCheckinDayClick}
+                onhandleCheckoutDayClick={this.onhandleCheckoutDayClick}
+                onChangeName={this.onChangeName}
+                onChangePhone={this.onChangePhone}
+                onReservationSubmit={this.onReservationSubmit}
+                {...this.state} {...this.props}
             />
         )
     }

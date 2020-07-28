@@ -3,18 +3,24 @@ import { Link } from 'react-router-dom'
 import RoompageConainer from '../../containers/roompage/Roompage'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import Dialog from '../../common/components/Dialog'
 import Loading from '../../common/components/Loading'
-import DayPicker from 'react-day-picker'
-import 'react-day-picker/lib/style.css'
+import RoomReservationComponent from './RoomReservationComponent'
+import ImageCarouselComponent from './ImageCarouselComponent'
+import RoomPriceContentComponent from './RoomPriceContentComponent'
+import RoomDescriComponent from './RoomDescriComponent'
+import RoomListComponent from './RoomListComponent'
 
-const roomType = {
-    'Single': '單人床',
-    'Double': '雙人床',
-    'Small Double': '豪華單人床',
-    'Queen': '豪華雙人床'
+const weekType = {
+    0: '日',
+    1: '一',
+    2: '二',
+    3: '三',
+    4: '四',
+    5: '五',
+    6: '六'
 }
+
 
 const Roompage = (props) => {
     const {
@@ -26,104 +32,52 @@ const Roompage = (props) => {
         isShowImageDialog,
         onChangeRoomType,
         onCloseReserveDialog,
-        onCloseImageDialog
+        onCloseImageDialog,
+        checkinDay,
+        checkoutDay,
+        onReservationSubmit
     } = props
 
-    const RoomListComponent = () => {
-        return (
-            <div className="roompage_info_right_top">
-                {
-                    allRooms && allRooms.length > 0 ?
-                        allRooms.map(el => {
-                            if (room.length > 0) {
-                                if (el.id !== room[ 0 ].id) {
-                                    return (
-                                        <Link
-                                            to={ `/roomInfo/${ el.name }` }
-                                            key={ el.id }
-                                            onClick={ () => onChangeRoomType(
-                                                el) }>
-                                            <h4>{ el.name.split(
-                                                '_').join(' ') }</h4>
-                                        </Link>
-                                    )
-                                }
-                            }
 
-                            return false
-                        }) :
-                        false
-                }
-            </div>
-        )
+    const formatDate = (d) => {
+        const date = new Date(d);
+        const month = (date.getMonth() + 1) < 10 ? `0${(date.getMonth() + 1)}` : (date.getMonth() + 1)
+        const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+        const formatdate = `${date.getFullYear()}/${month}/${day} 星期${weekType[date.getDay()]}`
+        return formatdate
     }
 
-    const RoomPriceContentComponent = () =>
-        <div className="roompage_info_right_middle_top">
-            <h3>{ room.length > 0 && room[ 0 ].name }</h3>
-            <div className="roompage_info_right_middle_price">
-                <div>平日(一~四)價格：<span>{ room.length > 0 &&
-                room[ 0 ].normalDayPrice }</span></div>
-                <div>假日(五~日)價格：<span>{ room.length > 0 &&
-                room[ 0 ].holidayPrice }</span></div>
-            </div>
-        </div>
 
-    const RoomDescriComponent = () =>
-        <div className="roompage_info_right_middle_down_half">
-            <div className="roompage_info_right_middle_descri">{ room.length >
-            0 && room[ 0 ].description }</div>
-            <div className="roompage_info_right_middle_detail">
-                <p>房客人數限制：{ room.length >
-                0 && room[ 0 ].descriptionShort.GuestMin } - { room.length >
-                0 && room[ 0 ].descriptionShort.GuestMax } 人</p>
-                <p>床型：{ roomType[ room.length >
-                0 && room[ 0 ].descriptionShort.Bed[ 0 ] ] }</p>
-                <p>衛浴數量：{ room.length >
-                0 && room[ 0 ].descriptionShort[ 'Private-Bath' ] } 間</p>
-                <p>房間大小：{ room.length >
-                0 && room[ 0 ].descriptionShort.Footage } 平方公尺</p>
-                <p>checkIn 時間：{ room.length >
-                0 && room[ 0 ].checkInAndOut.checkInEarly } ~ { room.length >
-                0 && room[ 0 ].checkInAndOut.checkInLate }</p>
-                <p>checkOut 時間：{ room.length >
-                0 && room[ 0 ].checkInAndOut.checkOut }</p>
-            </div>
-        </div>
-
-    // const RoomReservationComponent = (props) =>
-
-
-    console.log(room)
+    // console.log(room)
     return (
         <>
             <div className="roompage">
                 <div className="roompage_wrapper">
                     <div className="roompage_info">
                         <div className="roompage_info_left">
-                            <Link to={ '/' }><h2>WHITE INN</h2></Link>
-                            <ImageCarouselComponent {...props}/>
+                            <Link to={'/'}><h2>WHITE INN</h2></Link>
+                            <ImageCarouselComponent {...props} />
                         </div>
                         <div className="roompage_info_right">
-                            <RoomListComponent />
+                            <RoomListComponent  {...props} />
                             <div className="roompage_info_right_middle">
-                                <RoomPriceContentComponent />
+                                <RoomPriceContentComponent {...props} />
                                 <div className="roompage_info_right_middle_down">
-                                    <RoomDescriComponent />
-                                    <RoomReservationComponent {...props}/>
+                                    <RoomDescriComponent {...props} />
+                                    <RoomReservationComponent {...props} />
                                     {/*{RoomReservationComponent(props)}*/}
                                 </div>
                             </div>
                             <div className="roompage_info_right_down">
                                 {
                                     Object.keys(
-                                        room.length > 0 && room[ 0 ].amenities)
+                                        room.length > 0 && room[0].amenities)
                                         .map((el) => {
                                             return (
-                                                <div key={ el } className="roompage_info_right_down_item">
-                                                    { room[ 0 ].amenities[ el ] ?
+                                                <div key={el} className="roompage_info_right_down_item">
+                                                    {room[0].amenities[el] ?
                                                         <CheckBoxIcon /> :
-                                                        <CheckBoxOutlineBlankIcon /> }<span>{ el }</span>
+                                                        <CheckBoxOutlineBlankIcon />}<span>{el}</span>
                                                 </div>
                                             )
                                         })
@@ -133,89 +87,32 @@ const Roompage = (props) => {
                         </div>
                     </div>
                 </div>
-                <Dialog isShow={ isShowReserveDialog } onClose={ onCloseReserveDialog }>
+                <Dialog isShow={isShowReserveDialog} onClose={onCloseReserveDialog}>
                     <div className="roompagedialog">
                         <div className="roompagedialog_wrapper">
-                            <h3>{ room.length > 0 && room[ 0 ].name }</h3>
+                            <h3>{room.length > 0 && room[0].name}</h3>
                             <div className="roompagedialog_content">
                                 <div className="roompagedialog_content_descri">
                                     <span>入住</span>
-                                    <span>2019/09/10 星期三（15:00 起）</span>
+                                    <span>{formatDate(checkinDay)}（15:00 起）</span>
                                 </div>
                                 <div className="roompagedialog_content_descri">
                                     <span>退房</span>
-                                    <span>2019/09/12 星期五（10:00 前）</span>
+                                    <span>{formatDate(checkoutDay)}（10:00 前）</span>
                                 </div>
                             </div>
                             <div className="roompagedialog_total">3 晚 / 4260 元</div>
                         </div>
-                        <button>確定</button>
+                        <button onClick={onReservationSubmit}>確定</button>
                     </div>
                 </Dialog>
-                <Dialog isShow={ isShowImageDialog } onClose={ onCloseImageDialog }>
+                <Dialog isShow={isShowImageDialog} onClose={onCloseImageDialog}>
                     <div className="roompageimagedialog">
-                        <img src={ imageUrl }></img>
+                        <img src={imageUrl}></img>
                     </div>
-                </Dialog> <Loading isShow={ isShowLoading }></Loading>
+                </Dialog> <Loading isShow={isShowLoading}></Loading>
             </div>
         </>
-    )
-
-}
-
-function RoomReservationComponent (props){
-        const {onShowCheckinDatePicker, isShowCheckoutDatePicker,isShowCheckinDatePicker,onShowReserveDialog,onCloseCheckinDatePicker} =props
-        return <div className="roompage_info_right_middle_down_half">
-            <input type="text" placeholder="Name" />
-            <input type="text" placeholder="Phone"/>
-            <div className="roompage_info_right_middle_formDate">
-                <div className={ `roompage_info_right_middle_formDate_${ isShowCheckinDatePicker ?
-                    'formDateLeftBox' :
-                    'formDateLeftBoxNone' }` }>
-                    <input className="roompage_info_right_middle_formDate_title"
-                        onBlur={onCloseCheckinDatePicker}
-                        onFocus={onShowCheckinDatePicker}
-                        placeholder={"Check in"}
-                    />
-                    <DayPicker/>
-                </div>
-                <div className={ `roompage_info_right_middle_formDate_${ isShowCheckoutDatePicker ?
-                    'formDateRightBox' :
-                    'formDateRightBoxNone' }` }>
-                    <input className="roompage_info_right_middle_formDate_title"
-                        onBlur={onCloseCheckinDatePicker}
-                        onFocus={onShowCheckinDatePicker}
-                        placeholder={"Check out"}
-                    />
-                    <DayPicker />
-                </div>
-            </div>
-
-            <div className="roompage_info_right_middle_formButton">
-                <div></div>
-                <div>
-                    <button onClick={ onShowReserveDialog }>預約</button>
-                </div>
-            </div>
-
-        </div>
-}
-
-function ImageCarouselComponent(props) {
-    const {imageArr,onChangeArrangement,onShowImageDialog} = props
-    return(
-        imageArr && imageArr.length > 0 ? <>
-            <div className="roompage_info_left_largeimage" style={ { backgroundImage: `url(${ imageArr[ 0 ] })` } } onClick={ () => onShowImageDialog(
-                imageArr[ 0 ]) }>
-                <span className="roompage_info_left_caroucelBtn" onClick={ onChangeArrangement }><ArrowForwardIosIcon /></span>
-            </div>
-            <div className="roompage_info_left_smallimages">
-                <div className="roompage_info_left_smallimages_image" style={ { backgroundImage: `url(${ imageArr[ 1 ] })` } } onClick={ () => onShowImageDialog(
-                    imageArr[ 1 ]) }></div>
-                <div className="roompage_info_left_smallimages_image" style={ { backgroundImage: `url(${ imageArr[ 2 ] })` } } onClick={ () => onShowImageDialog(
-                    imageArr[ 2 ]) }></div>
-            </div>
-        </> : null
     )
 
 }

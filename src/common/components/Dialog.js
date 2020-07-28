@@ -11,7 +11,7 @@ const Dialog = (props) => {
 
     return (
         <div className={isShow ? "dialog" : "dialog_none"} onClick={onClose}>
-            <div className="dialog_boxwrapper">
+            <div className="dialog_boxwrapper" onClick={(e)=>e.stopPropagation()}>
                 {props.children}
                 <span className="dialog_boxwrapper_closebtn" onClick={onClose}><ClearIcon/></span>
             </div>
