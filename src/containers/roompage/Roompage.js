@@ -146,7 +146,6 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
         // console.log(checkinDay)
         e.stopPropagation()
 
-        try{
             api.room.addRoom(
                 {
                     id: sessionStorage.roomId,
@@ -155,21 +154,12 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
                     date: [this.formatDate(checkinDay), this.formatDate(checkoutDay)]
                 })
                 .then((res) => {
-                    // console.log(res)
-                    // const { success, room, booking } = res.data
-                    // if (success) {
-                    //     this.setState({
-                    //         room: room,
-                    //         booking: booking,
-                    //         imageArr: room[0].imageUrl,
-                    //         isShowLoading: false
-                    //     })
-                    // }
+                    console.log('111111111111111111111111',res)
+
+                }).catch(err=>{
+                    // alert(err.response.data.message)
                 })
-        }catch(err){
-            console.log(err)
-            alert(err.message)
-        }
+
     }
 
     componentDidMount() {

@@ -25,9 +25,9 @@ export const req = (api, method = 'get', params = {}, config = {}) => {
       headers,
     }).then(resolve)
       .catch(error => {
-        console.dir(error);
-        // Message.error(typeof error.response.data === 'string' ? error.response.data : JSON.stringify(error.response.data));
-        reject(error);
+        // console.dir(error.response.data);
+        throw (typeof error.response.data === 'string' ? error.response.data : JSON.stringify(error.response.data));
+        // reject(error);
       });
   });
 };
