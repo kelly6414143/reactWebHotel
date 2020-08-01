@@ -1,11 +1,15 @@
 import App from './App'
 import Homepage from './components/homepage/Homepage';
+import Roompage from './components/roompage/Roompage';
 
 const routeConfig = [
     {
         path:'/',
-        component: App,
-        indexRoute: { component: Homepage },
+        component: Homepage,
+    },
+    {
+        path:"/roomInfo/:type",
+        component:Roompage
     }
 ]
 
