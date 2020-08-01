@@ -157,7 +157,7 @@ const RoompageConainer = (WrappedComponent) => class extends React.Component {
                     console.log('111111111111111111111111',res)
 
                 }).catch(err=>{
-                    // alert(err.response.data.message)
+                    alert(err.response.data.message)
                 })
 
     }
